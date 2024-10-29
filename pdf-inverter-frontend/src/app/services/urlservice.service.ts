@@ -14,9 +14,6 @@ export class UrlserviceService {
   invertFile(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-
-    console.log('Sending file: ', file);
-
     // Create a new HTTP request with reportProgress set to true
     const req = new HttpRequest('POST', this.apiUrl, formData, {
       reportProgress: true,
