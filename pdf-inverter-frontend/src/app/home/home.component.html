@@ -7,13 +7,27 @@
     <div class="col-md-4">
       <input type="file" (change)="onFileSelected($event)" />
       <button (click)="invertPdf()" [disabled]="!selectedFile">Invert</button>
+
+      <!-- Progress bar -->
+      <div *ngIf="loading" class="progress mt-3">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          [style.width]="progress + '%'"
+          [attr.aria-valuenow]="progress"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          {{ progress }}%
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
       <h3>Uploaded File</h3>
       <p *ngIf="selectedFile">{{ selectedFile.name }}</p>
-      <a *ngIf="downloadLink" [href]="downloadLink" download="inverted.pdf"
-        >Download</a
-      >
+      <a *ngIf="downloadLink" [href]="downloadLink" download="inverted.pdf">
+        Download
+      </a>
     </div>
   </div>
 </div>
