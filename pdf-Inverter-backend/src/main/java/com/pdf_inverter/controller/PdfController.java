@@ -26,11 +26,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/invert")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://localhost:4200/")
 public class PdfController {
 
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<?> invertPdf(@RequestParam MultipartFile file, @RequestParam(defaultValue = "150") int dpi) {
+
 		if (!file.getContentType().equals("application/pdf")) {
 			return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body("Only PDF files are supported.");
 		}
@@ -59,13 +60,30 @@ public class PdfController {
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_PDF);
-			String originalFilename = file.getOriginalFilename();
-			String outputFilename = originalFilename != null ? originalFilename.replace(".pdf", "-inverted.pdf")
-					: "inverted.pdf";
-			headers.setContentDispositionFormData("attachment", outputFilename);
 
+			// Get the original filename
+			String originalFilename = file.getOriginalFilename();
+			if (originalFilename == null) {
+				System.out.println("Original filename is null.");
+				originalFilename = "inverted.pdf"; // Fallback if original is null
+			}
+
+			// Construct the output filename
+			String outputFilename = originalFilename.replace(".pdf", "-inverted.pdf");
+
+			System.out.println("Output Filename: " + outputFilename);
+
+			// Set the Content-Disposition header correctly
+			headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + outputFilename + "\"");
+
+			// Correctly print the Content-Disposition header
+			System.out.println("Content-Disposition: " + headers.getFirst(HttpHeaders.CONTENT_DISPOSITION));
+
+			// Return the response
 			return new ResponseEntity<>(outputStream.toByteArray(), headers, HttpStatus.OK);
+
 		} catch (IOException e) {
+			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error processing PDF: " + e.getMessage());
 		}
