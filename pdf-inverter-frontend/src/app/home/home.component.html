@@ -1,15 +1,25 @@
-<div class="container">
+<div
+  class="container"
+  [ngClass]="{ 'pdf-inverter': true, 'dark-mode': darkMode }"
+>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 instructions">
       <h3>Instructions</h3>
       <p>Upload a PDF file to invert its colors.</p>
     </div>
-    <div class="col-md-4">
-      <input type="file" (change)="onFileSelected($event)" />
-      <button (click)="invertPdf()" [disabled]="!selectedFile || loading">
-        Invert
+    <div class="col-md-4 file-upload">
+      <label class="file-input-label">
+        <input type="file" (change)="onFileSelected($event)" />
+        <span>Choose PDF File</span>
+      </label>
+      <button
+        class="invert-button"
+        (click)="invertPdf()"
+        [disabled]="!selectedFile || loading"
+      >
+        Invert Colors
       </button>
-      <div *ngIf="loading">
+      <div *ngIf="loading" class="progress-container">
         <p>Inverting PDF... {{ progress }}%</p>
         <div class="progress">
           <div
@@ -23,15 +33,16 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 file-info">
       <h3>Uploaded File</h3>
       <p *ngIf="selectedFile">{{ selectedFile.name }}</p>
       <a
         *ngIf="downloadLink"
         [href]="downloadLink"
         [download]="selectedFile?.name + '-inverted.pdf'"
-        >Download
-      </a>
+        class="download-link"
+        >Download Inverted PDF</a
+      >
     </div>
   </div>
 </div>

@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+  darkMode: boolean = false;
   selectedFile: File | null = null;
   downloadLink: string | null = null;
   loading: boolean = false;
@@ -63,5 +64,9 @@ export class HomeComponent {
         },
       });
     }
+  }
+
+  toggleDarkMode(): void {
+    this.darkMode = !this.darkMode;
   }
 }

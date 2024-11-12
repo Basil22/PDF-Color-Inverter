@@ -1,12 +1,131 @@
+.pdf-inverter {
+  padding: 20px;
+  background-color: white; /* Light background by default */
+  /* Removed border-radius to eliminate the box shape */
+  border-radius: 0; /* No rounded corners */
+  font-family: Arial, sans-serif;
+  color: #2c2f33; /* Dark text by default */
+  border: none; /* No border */
+  box-shadow: none; /* No shadow */
+}
+
+.pdf-inverter.dark-mode {
+  background-color: #2c2f33; /* Dark background for dark mode */
+  color: #f0f0f0; /* Light text for dark mode */
+}
+
+.instructions h3,
+.file-info h3 {
+  font-size: 1.2em;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.instructions p,
+.file-info p {
+  font-size: 0.9em;
+  color: #b0b3b8;
+}
+
+.pdf-inverter.dark-mode .instructions h3,
+.pdf-inverter.dark-mode .file-info h3 {
+  color: #f0f0f0; /* Light text for headings in dark mode */
+}
+
+.pdf-inverter.dark-mode .instructions p,
+.pdf-inverter.dark-mode .file-info p {
+  color: #cccccc; /* Lighter text for body content in dark mode */
+}
+
+.file-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-input-label {
+  display: inline-block;
+  margin-bottom: 10px;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid #7289da; /* Discord-like blue */
+  color: #7289da;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.file-input-label:hover {
+  background-color: #7289da;
+  color: #fff;
+}
+
+.file-input-label input[type="file"] {
+  display: none;
+}
+
+.invert-button {
+  padding: 10px 20px;
+  background-color: #43b581; /* Light green */
+  color: #2c2f33;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.invert-button:disabled {
+  background-color: #3d6e59;
+  cursor: not-allowed;
+}
+
+.progress-container {
+  margin-top: 10px;
+  width: 100%;
+}
+
 .progress {
-    height: 20px;
-    background-color: #f3f3f3;
-    border-radius: 5px;
-  }
-  
-  .progress-bar {
-    height: 100%;
-    background-color: #007bff;
-    transition: width 0.2s;
-  }
-  
+  height: 8px;
+  background-color: #444b52; /* Darker progress background */
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.progress-bar {
+  background-color: #7289da;
+  transition: width 0.3s;
+}
+
+.download-link {
+  color: #7289da;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.download-link:hover {
+  text-decoration: underline;
+}
+
+/* Dark Mode-specific styles */
+.pdf-inverter.dark-mode .invert-button {
+  background-color: #3c8c65; /* Darker green for dark mode */
+  color: #f0f0f0; /* Light text */
+}
+
+.pdf-inverter.dark-mode .progress {
+  background-color: #555a61; /* Darker progress background for dark mode */
+}
+
+.pdf-inverter.dark-mode .progress-bar {
+  background-color: #7289da; /* Maintain progress bar color */
+}
+
+.pdf-inverter.dark-mode .download-link {
+  color: #7289da;
+}
+
+.pdf-inverter.dark-mode .download-link:hover {
+  text-decoration: underline;
+}
